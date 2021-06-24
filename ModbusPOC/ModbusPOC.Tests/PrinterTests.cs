@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Reflection;
+using ModbusPOC.Library;
 using Xunit;
 
 namespace ModbusPOC.Tests
@@ -18,7 +20,7 @@ namespace ModbusPOC.Tests
         };
     }
 
-    public class UnitTest1
+    public class PrinterTests
     {
         [Fact]
         public void Test1()
@@ -26,16 +28,14 @@ namespace ModbusPOC.Tests
             //Arrange
 
             var data = InMemoryData.Lines;
+            var printerClient = new PrinterClient("testPrinter", "192.168.0.9", "502");
 
-
+            
             //Act
-
-            //var response = LibraryWrapper.SendMessage(ipAddress, port, data);
-
-
+            var response = printerClient.SendMessage("ABC123");
 
             //Assert
-            //Assert.Equal(response.responseCode,10);
+            Assert.True(response);
         }
     }
 }
